@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for spos-api on 2026-02-02T16:36:25Z
+# fly.toml app configuration file generated for spos-api on 2026-02-02T17:28:49Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'spos-api'
-primary_region = 'iad'
+primary_region = 'ams'
 
 [build]
 
@@ -20,4 +20,4 @@ primary_region = 'iad'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1024
+  memory_mb = 256
