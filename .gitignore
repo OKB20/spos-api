@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.venv/
+env/
+.env
+.env.*
+*.sqlite3
+*.db
+*.log
+Backend.zip
+all_tests_output.txt
+test_output.txt
+verification_tests.txt
+*.pyc

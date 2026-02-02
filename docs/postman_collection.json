@@ -1,0 +1,167 @@
+{
+  "info": {
+    "name": "SmartPOS Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+        "url": "{{base_url}}/auth/login",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "username", "value": "user@example.com" },
+            { "key": "password", "value": "password" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Auth - Profile",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/auth/me"
+      }
+    },
+    {
+      "name": "Products - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/products"
+      }
+    },
+    {
+      "name": "Customers - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/customers"
+      }
+    },
+    {
+      "name": "Customers - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{base_url}}/pos/customers",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Client Test\",\n  \"email\": \"client@test.com\",\n  \"phone\": \"555-0001\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Inventory - Transactions List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/inventory/transactions?limit=50"
+      }
+    },
+    {
+      "name": "Inventory - Create Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{base_url}}/pos/inventory/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": \"<uuid>\",\n  \"quantity_change\": 1,\n  \"transaction_type\": \"stock_adjustment\",\n  \"notes\": \"demo\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Sales - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/sales?limit=20"
+      }
+    },
+    {
+      "name": "Sales - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Idempotency-Key", "value": "sample-123" }
+        ],
+        "url": "{{base_url}}/pos/sales",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"subtotal\": 100,\n  \"total_amount\": 100,\n  \"payment_method\": \"cash\",\n  \"items\": [\n    {\"product_id\": \"<uuid>\", \"quantity\": 1, \"unit_price\": 100, \"total_price\": 100}\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Returns - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/returns?limit=20"
+      }
+    },
+    {
+      "name": "Returns - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{base_url}}/pos/returns",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sale_id\": \"<uuid>\",\n  \"product_id\": \"<uuid>\",\n  \"processed_by\": \"<user_uuid>\",\n  \"quantity\": 1,\n  \"refund_amount\": 10,\n  \"reason\": \"Client\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Purchases - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/purchases?limit=20"
+      }
+    },
+    {
+      "name": "Purchases - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{base_url}}/pos/purchases",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"supplier_name\": \"Fournisseur SA\",\n  \"total_amount\": 200,\n  \"status\": \"paid\",\n  \"items\": [\n    {\"product_id\": \"<uuid>\", \"quantity\": 2, \"unit_price\": 100, \"total_price\": 200}\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Reports - Summary",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{base_url}}/pos/reports/summary"
+      }
+    }
+  ]
+}
