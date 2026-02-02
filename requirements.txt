@@ -10,3 +10,4 @@ passlib[bcrypt]==1.7.4
 bcrypt==3.2.2  # pin for passlib compatibility (__about__ removal in bcrypt 4.x)
 python-multipart==0.0.21
 pytest==9.0.2
+psycopg2-binary==2.9.8
