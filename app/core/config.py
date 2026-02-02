@@ -11,7 +11,12 @@ load_dotenv(_ROOT_DIR / ".env")
 class Settings(BaseSettings):
     """Application settings loaded from environment variables or .env."""
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=False)
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore",
+    )
 
     app_name: str = "SmartPOS Backend"
     environment: str = "development"
