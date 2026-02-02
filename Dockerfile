@@ -12,4 +12,5 @@ FROM python:3.12.12-slim
 WORKDIR /app
 COPY --from=builder /app/.venv .venv/
 COPY . .
-CMD ["/app/.venv/bin/fastapi", "run"]
+RUN chmod +x /app/entrypoint.sh
+CMD ["/app/entrypoint.sh"]
