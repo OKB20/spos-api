@@ -1,5 +1,11 @@
 from functools import lru_cache
+from pathlib import Path
+
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_ROOT_DIR = Path(__file__).resolve().parents[1]
+load_dotenv(_ROOT_DIR / ".env")
 
 
 class Settings(BaseSettings):
